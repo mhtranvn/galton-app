@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+              <p>
+                <h5>
+                  <strong>Introduction</strong>
+                </h5>
+                This app (
+                <a href="https://github.com/mhtranvn/galton-app">source code in Github</a>
+                )
+                 is created using RStudio's Shiny package as a part of an assignment in Coursera MOOC's Developing Data Products.
+                It predicts child's height at adult age from parents height(s) and child's gender.
+                <br/>
+                The model is fitted from data based on the famous 1885 study by Sir Francis Galton, exploring the relationship between the heights of adult children and the heights of their parents.
+                The fitted linear model is quite accurate and it was claimed that the model can challenge modern genomic studies.
+                <br/>
+                <h5>
+                  <strong>Input</strong>
+                </h5>
+                User must select or enter values for these parameters:
+                <br/>
+                <em>Prediction based on:</em>
+                The prediction is based on both parents' heights or mother's or father's height only.
+                <br/>
+                <em>Father's Height in cm:</em>
+                Use this slider to select father's height in cm.
+                <br/>
+                <em>Mother's Height in cm:</em>
+                Use this slider to select mother's height in cm.
+                <br/>
+                <em>Child's Gender:</em>
+                Select gender of the child
+                <br/>
+                <em>Confidence Interval % :</em>
+                Select confidence level for prediction interval, can be from more than 0 to less than 100.
+                Widely accepted default value is 95%.
+                The prediction interval tells us about the distribution of values. For example with confidence level of 95% we expect that 95% of the samples to lie within this interval.
+                <h5>
+                  <strong>Result</strong>
+                </h5>
+                The app gives the predicted adult child's height in cm, as well as prediction interval of the given confidence level.
+                <br/>
+                <em>Comparison Plot</em>
+                Comparison plot shows child's height compared to father's and/or mother's height(s).
+                The darker box on top of child's bar represents prediction interval, so top of this box equals to upper limit of prediction interval,
+                 and bottom - lower limit. The horizontal red line with number represents predicted child's height.
+                <h5>
+                  <strong>Reference and Source</strong>
+                </h5>
+                Full Galton's dataset from the University of Alabama in Huntsville 
+                <a href="http://www.math.uah.edu/stat/data/Galton.csv"> download</a>
+                <br/>
+                <a href="https://github.com/mhtranvn/galton-app">Source code in Github</a>
+                <br/>
+                <br/>
+                (c) Tran Manh Hien, 2015
+              </p>
+</body>
+</html>

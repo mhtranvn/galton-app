@@ -1,4 +1,5 @@
 ## Predict child height from parents heights based on Galton Data
+source("helpers.R")
 
 shinyUI(fluidPage(
   titlePanel("Children Height Prediction based on Galton's data "),
@@ -42,8 +43,8 @@ shinyUI(fluidPage(
                  plotOutput("plot")
         ), 
         tabPanel("Documentation",
-                 ## include content of documentation from doc.html file here
-                 includeHTML("doc.html")
+                 ## can helpers.R's show_doc() function
+                 show_doc()
         )
       )
     )
