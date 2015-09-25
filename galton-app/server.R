@@ -4,7 +4,7 @@ require(shiny)
 require(ggplot2)
 
 ## Read data
-gdata <- read.csv("./data/Galton.csv", stringsAsFactors = FALSE)
+gdata <- read.csv("./data/galton.csv", stringsAsFactors = FALSE)
 ## strip-off unused columns
 gdata <- gdata[,c(2:5)]
 ## convert to cm unit of measure
