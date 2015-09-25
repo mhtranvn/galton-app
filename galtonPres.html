@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prediction of child's height</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Prediction of child's height">
+  <meta name="author" content="Tran Manh Hien">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/slides" 
+    src="http://slidifylibraries2.googlecode.com/git/inst/libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Prediction of child's height</h1>
+    <h2>Galton-app presentation using slidify</h2>
+    <p>Tran Manh Hien<br/>Coursera MOOC's Data Science student</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>ganton-app predicts child&#39;s height at adult age from parents height(s) and child&#39;s gender.</li>
+<li>The model is fitted from data based on the famous 1885 study by Sir Francis Galton.</li>
+<li>The fitted linear model is quite accurate and it was claimed that the model can challenge modern genomic studies <a href="http://www.nature.com/ejhg/journal/v17/n8/full/ejhg20095a.html">(Predicting human height by Victorian and genomic methods, Nature 2009)</a> </li>
+<li>The app was created using RStudio&#39;s shiny package and deployed at shinyapps.io
+
+<ul>
+<li>Simplicity in development.</li>
+<li>Easy to use.</li>
+<li>Deployment in Internet for accessibility.</li>
+<li>Scalability: computers and mobile platforms.<br></li>
+</ul></li>
+<li>Run from <a href="https://hien.shinyapps.io/galton-app">here</a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Full <a href="http://www.math.uah.edu/stat/data/Galton.html">dataset</a> was downloaded from the University of Alabama in Huntsville website.<br></li>
+<li>Data related to parents&#39;s heights, childrens&#39; genders and heights are retained.<br></li>
+</ul>
+
+<pre><code class="r">require(utils)
+download.file(&quot;http://www.math.uah.edu/stat/data/Galton.csv&quot;,&quot;Galton.csv&quot;,method=&quot;auto&quot;, quiet=TRUE)
+gdata &lt;- read.csv(&quot;Galton.csv&quot;, stringsAsFactors = FALSE)
+## strip-off unused columns
+gdata &lt;- gdata[,c(2:5)]
+head(gdata,5)
+</code></pre>
+
+<pre><code>##   Father Mother Gender Height
+## 1   78.5   67.0      M   73.2
+## 2   78.5   67.0      F   69.2
+## 3   78.5   67.0      F   69.0
+## 4   78.5   67.0      F   69.0
+## 5   75.5   66.5      M   73.5
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Fitting Models and Prediction</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>For simplicity we fit 3 linear regression models using \(lm()\) function:
+
+<ol>
+<li>Child&#39;s height ~ both parents&#39; height and child&#39;s gender 
+\[Y_i =  \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i}\]</li>
+<li>Child&#39;s height ~ father&#39;s height and child&#39;s gender</li>
+<li>Child&#39;s height ~ mother&#39;s height and child&#39;s gender</li>
+</ol></li>
+<li>All models intercepts and slopes are significant with \(p-values\) &lt; 0.001</li>
+<li>Depending on user&#39;s selection for prediction based on both parents&#39; heights, or only individual parent&#39;s height, the respective fitted model will be selected.</li>
+<li>Prediction using \(predict.lm()\) function with the confidence level given by user for prediction inteval.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Easy to Use</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Run from this link <a href="https://hien.shinyapps.io/galton-app">https://hien.shinyapps.io/galton-app</a></li>
+<li><p>Enter/select parameters:</p>
+
+<ul>
+<li>Prediction based on both parents heights or only one of them.</li>
+<li>Use slider(s) to select parents heights.</li>
+<li>Choose child&#39;s gender.</li>
+<li>Change confidence level as needed. By default it is 95%</li>
+</ul></li>
+<li><p>The app immediatelly responds to user&#39;s change of parameters.</p></li>
+<li><p>Predicted height and prediction interval are displayed.</p></li>
+<li><p>Bar graph to compare child&#39;s height and prediction interval with parents heights.</p></li>
+</ul>
+
+<p>\[Thanks\]</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Data'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Fitting Models and Prediction'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Easy to Use'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="http://slidifylibraries2.googlecode.com/git/inst/libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
